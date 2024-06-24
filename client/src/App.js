@@ -1,9 +1,12 @@
+import Router from "./Router";
+import axios from "axios"
+
+axios.defaults.withCredentials = true
+
 function App() {
   return (
     <>
-      <div className='bg-red-600 p-4'>
-        App
-      </div>
+      <Router />
     </>
   );
 }
