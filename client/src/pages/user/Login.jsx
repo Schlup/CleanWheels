@@ -1,31 +1,18 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom"
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
 
-export default function Signup() {
-    const [name, setName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [cpf, setCpf] = useState("")  
+export default function Login() {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [cpassword, setCpassword] = useState("");
-
-    const navigate = useNavigate();
+    const [password, setPassword] = useState("")
 
     async function submit(e) {
-        e.preventDefault();
-
+        e.preventDefault()
         try {
-            const response = await axios.post("http://localhost:3025/auth/signup", {
-                name,
-                lastname: lastName,
-                cpf,
+            await axios.post("http://localhost:3025/auth/login", {
                 email,
                 password,
-                passwordVerify: cpassword,
             });
-            console.log(response.data);
-            navigate("/login");
         } catch (e) {
             console.log(e);
         }
@@ -35,56 +22,21 @@ export default function Signup() {
         <div className="flex w-full h-screen">
             <div className="w-full flex items-center justify-center lg:w-1/2">
                 <div className="bg-white px-10 py-20 rounded-3xl">
-                    <h1 className="text-5xl font-semibold">Welcome!</h1>
+                    <h1 className="text-5xl font-semibold">Welcome Back</h1>
                     <p className="font-medium text-lg text-gray-500 mt-4">
                         Please enter your details
                     </p>
+
                     <div className="mt-2">
-                        <form method="POST">
-                            <label className="text-lg font-medium">Name</label>
-                            <input
-                                name="name"
-                                id="name"
-                                onChange={(e) => { setName(e.target.value) }}
-                                type="text"
-                                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
-                                placeholder="Enter your name"
-                            />
-                        </form>
-
-                        <form method="POST">
-                            <label className="text-lg font-medium">Last name</label>
-                            <input
-                                name="lastName"
-                                id="lastName"
-                                onChange={(e) => { setLastName(e.target.value) }}
-                                type="text"
-                                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
-                                placeholder="Enter your last name"
-                            />
-                        </form>
-                    
-                        <form method="POST">
-                            <label className="text-lg font-medium">CPF</label>
-                            <input
-                                name="cpf"
-                                id="cpf"
-                                onChange={(e) => { setCpf(e.target.value) }}
-                                type="text"
-                                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
-                                placeholder="Enter your CPF"
-                            />
-                        </form>
-
                         <form method="POST">
                             <label className="text-lg font-medium">Email</label>
                             <input
                                 name="email"
                                 id="email"
-                                onChange={(e) => { setEmail(e.target.value) }}
                                 type="email"
                                 className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
                                 placeholder="Enter your e-mail"
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </form>
 
@@ -93,32 +45,27 @@ export default function Signup() {
                             <input
                                 name="password"
                                 id="password"
-                                onChange={(e) => { setPassword(e.target.value) }}
+                                type="password"
                                 className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
                                 placeholder="Enter your password"
-                                type="password"
-                            />
-                        </form>
-
-                        <form method="POST">
-                            <label className="text-lg font-medium">Confirm password</label>
-                            <input
-                                name="confirmpassword"
-                                id="confirmpassword"
-                                onChange={(e) => { setCpassword(e.target.value) }}
-                                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
-                                placeholder="Repeat your password"
-                                type="password"
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </form>
                     </div>
+                    <div className="mt-8 flex justify-between items-center">
+                        <div>
+                            <input type="checkbox" id="remember" />
+                            <label className="ml-2 font-medium text-base" htmlFor="remember">
+                                Remember me
+                            </label>
+                        </div>
+                        <button className="font-medium text-base text-violet-500">
+                            Forgot password
+                        </button>
+                    </div>
                     <div className="mt-8 flex flex-col gap-y-4">
-                        <button
-                            className="active:scale-[.98] hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-violet-500 text-white text-lg font-bold"
-                            type="submit"
-                            onClick={submit}
-                        >
-                            Sign up
+                        <button className="active:scale-[.98] hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-violet-500 text-white text-lg font-bold" type="submit" onClick={submit}>
+                            Sign in
                         </button>
                         <button className="active:scale-[.98] hover:scale-[1.01] ease-in-out flex border-2 border-gray-100 py-3 rounded-xl items-center justify-center gap-2">
                             <svg
@@ -145,13 +92,13 @@ export default function Signup() {
                                     fill="#FBBC05"
                                 />
                             </svg>
-                            Sign up with Google
+                            Sign in with Google
                         </button>
                     </div>
                     <div className="mt-8 flex justify-center items-center">
-                        <p className="font-medium text-base">Already have an account?</p>
+                        <p className="font-medium text-base">Don't have an account?</p>
                         <button className="text-violet-500 text-base font-medium ml-2">
-                            <Link to="/login">Log in</Link>
+                            <Link to="/signup">Sign up</Link>
                         </button>
                     </div>
                 </div>

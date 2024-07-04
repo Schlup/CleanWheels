@@ -2,8 +2,6 @@ const companyRouter = require("express").Router()
 const Company = require("../models/companyModel")
 const auth = require("../middleware/auth")
 
-const User = require("../models/companyModel")
-const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 // Signup
