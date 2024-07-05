@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../../context/UserAuthContext";
 
 export default function Signup() {
     const [name, setName] = useState("");
@@ -10,11 +11,14 @@ export default function Signup() {
     const [password, setPassword] = useState("");
     const [cpassword, setCpassword] = useState("");
 
+    const { getLoggedIn } = useContext(AuthContext)
+    const navigate = useNavigate()
+
     async function submit(e) {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:3025/auth/signup", {
+            await axios.post("http://localhost:3025/auth/signup", {
                 name,
                 lastname: lastName,
                 cpf,
@@ -22,7 +26,8 @@ export default function Signup() {
                 password,
                 passwordVerify: cpassword,
             });
-            console.log(response.data);
+            await getLoggedIn(); // Atualiza o UserAuthContext da pagina, precisa do await para não dar erro
+            navigate("/login")
         } catch (e) {
             console.log(e);
         }
