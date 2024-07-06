@@ -1,19 +1,19 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
-function CreateCompanyBtn() {
+function AccessCompanyBtn() {
 
     const navigate = useNavigate()
 
     async function goTo() {
-        navigate("/createcompany")
+        navigate("/companydashboard")
     }
 
     return (
         <button onClick={goTo} className='bg-purple-700 py-1 px-6 rounded-lg text-white'>
-            Registrar Empresa
+            Acessar Empresa
         </button>
     )
 }
 
-export default CreateCompanyBtn
+export default AccessCompanyBtn

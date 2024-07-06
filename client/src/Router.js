@@ -4,7 +4,8 @@ import LandingPage from './pages/user/LandingPage'
 import Login from './pages/user/Login'
 import Signup from "./pages/user/Signup"
 import Home from "./pages/user/Home"
-import Company from './pages/company/CreateCompany'
+import CreateCompany from './pages/company/CreateCompany'
+import CompanyDashboard from "./pages/company/CompanyDashboard"
 import AuthContext from './context/UserAuthContext'
 
 function Router() {
@@ -27,7 +28,8 @@ function Router() {
                         <Route path='/home' element={<Home />} />
                     </>
                 )}
-                <Route path='/company' element={<Company />} />
+                <Route path='/companydashboard' element={<CompanyDashboard />} />
+                <Route path='/createcompany' element={<CreateCompany />} />
             </Routes>
         </BrowserRouter>
     )

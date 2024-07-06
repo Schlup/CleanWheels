@@ -57,7 +57,7 @@ userRouter.post("/signup", async (req, res) => {
             await newUser.save()
             res.status(200).json({ msg: "User created successfully." })
         } catch (error) {
-            res.status(500).json({ msg: "Serverside error." });
+            res.status(500).json({ errorMessage: "Serverside error." });
         }
 
     } catch (err) {
@@ -75,23 +75,23 @@ userRouter.post("/login", async (req, res) => {
         // validation
 
         if (!email) {
-            return res.status(422).json({ msg: "E-mail is required!" });
+            return res.status(422).json({ errorMessage: "E-mail is required!" });
         }
 
         if (!password) {
-            return res.status(422).json({ msg: "Password is required!" });
+            return res.status(422).json({ errorMessage: "Password is required!" });
         }
 
         //Check if user exists
 
         const userCheck = await User.findOne({ email: email });
         if (!userCheck) {
-            return res.status(404).json({ msg: "User not found." });
+            return res.status(404).json({ errorMessage: "User not found." });
         }
 
         const passwordCheck = await bcrypt.compare(password, userCheck.password);
         if (!passwordCheck) {
-            return res.status(422).json({ msg: "Incorrect password!" });
+            return res.status(422).json({ errorMessage: "Incorrect password!" });
         }
 
         // sign the token
@@ -103,9 +103,7 @@ userRouter.post("/login", async (req, res) => {
 
         // send the token in a HTTP-only cookie
 
-        res.cookie("token", token, {
-            httpOnly: true
-        }).send()
+        res.cookie("token", token, { httpOnly: true }).send()
         console.log("Token sent, user logged in.")
 
     } catch (err) {

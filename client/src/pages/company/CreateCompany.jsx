@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Company() {
+function CreateCompany() {
   return (
-    <div>Company</div>
+    <div>Create Company</div>
   )
 }
 
-export default Company
+export default CreateCompany
