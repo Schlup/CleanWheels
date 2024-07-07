@@ -54,24 +54,20 @@ companyRouter.post("/signup", auth, async (req, res) => {
     }
 });
 
-companyRouter.get("/companyOwner", auth, async (req, res) => {
+companyRouter.get("/companyOwner", async (req, res) => {
     try {
         const token = req.cookies.token
+
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
         console.log(decodedToken)
 
         const result = await Company.findOne({ owner: decodedToken.user });
-        console.log(result)
 
-        if (result === null) {
-            res.send(false)
-        } else {
-            res.status(200).send(true)
-        }
+        if (result === null) return res.send(false)
+        res.send(true)
 
     } catch (err) {
-        console.log(err)
-        res.send({ errorMessage: "Error analyzing user" })
+        res.send(false)
     }
 })
 

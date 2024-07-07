@@ -2,12 +2,14 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import AuthContext from "../../context/UserAuthContext";
+import CompanyContext from "../../context/CompanyAuthContext";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
 
     const { getLoggedIn } = useContext(AuthContext)
+    const { getOwnCompany } = useContext(CompanyContext)
     const navigate = useNavigate()
 
     async function submit(e) {
@@ -18,6 +20,7 @@ export default function Login() {
                 password,
             });
             await getLoggedIn() // Atualiza o UserAuthContext da pagina, precisa do await para não dar erro
+            await getOwnCompany()
             navigate("/home")
         } catch (e) {
             console.log(e);

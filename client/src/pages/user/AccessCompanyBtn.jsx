@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import CompanyContext from '../../context/CompanyAuthContext';
+import AuthContext from '../../context/UserAuthContext';
 
 function AccessCompanyBtn() {
 
     const navigate = useNavigate()
+    const { getLoggedIn } = useContext(AuthContext);
+    const { getOwnCompany } = useContext(CompanyContext)
 
     async function goTo() {
+        await getLoggedIn()
+        await getOwnCompany()
         navigate("/companydashboard")
     }
 

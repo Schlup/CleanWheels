@@ -122,6 +122,8 @@ userRouter.get("/logout", (req, res) => {
     console.log("Cookie deleted.")
 });
 
+// Check if user is loggedIn the server
+
 userRouter.get("/loggedIn", (req, res) => {
     try {
         const token = req.cookies.token
@@ -134,6 +136,5 @@ userRouter.get("/loggedIn", (req, res) => {
         res.json(false)
     }
 })
-
 
 module.exports = userRouter;
