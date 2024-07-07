@@ -1,5 +1,6 @@
 const companyRouter = require("express").Router()
 const Company = require("../models/companyModel")
+const User = require("../models/userModel")
 const auth = require("../middleware/auth")
 
 const jwt = require("jsonwebtoken")
@@ -52,5 +53,26 @@ companyRouter.post("/signup", auth, async (req, res) => {
         res.status(500).json({ errorMessage: "Error creating company" })
     }
 });
+
+companyRouter.get("/companyOwner", auth, async (req, res) => {
+    try {
+        const token = req.cookies.token
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+        console.log(decodedToken)
+
+        const result = await Company.findOne({ owner: decodedToken.user });
+        console.log(result)
+
+        if (result === null) {
+            res.send(false)
+        } else {
+            res.status(200).send(true)
+        }
+
+    } catch (err) {
+        console.log(err)
+        res.send({ errorMessage: "Error analyzing user" })
+    }
+})
 
 module.exports = companyRouter;
