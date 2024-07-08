@@ -1,6 +1,5 @@
 const companyRouter = require("express").Router()
 const Company = require("../models/companyModel")
-const User = require("../models/userModel")
 const auth = require("../middleware/auth")
 
 const jwt = require("jsonwebtoken")
@@ -68,6 +67,18 @@ companyRouter.get("/companyOwner", async (req, res) => {
 
     } catch (err) {
         res.send(false)
+    }
+})
+
+companyRouter.get("/getInfo", auth, async (req, res) => {
+    try {
+        const token = req.cookies.token
+
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+        console.log(decodedToken)
+        res.send(decodedToken)
+    } catch (err) {
+        res.send(err)
     }
 })
 
