@@ -9,6 +9,7 @@ import CompanyDashboard from "./pages/company/CompanyDashboard"
 
 import AuthContext from './context/UserAuthContext'
 import CompanyContext from './context/CompanyAuthContext'
+import CreateService from './pages/company/CreateService'
 
 function Router() {
 
@@ -43,6 +44,7 @@ function Router() {
 
                         {ownCompany === true && (
                             <>
+                                <Route path='/createservice' element={<CreateService />} />
                                 <Route path='/companydashboard' element={<CompanyDashboard />} />
                             </>
                         )}

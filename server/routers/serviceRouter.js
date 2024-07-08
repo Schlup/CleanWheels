@@ -5,13 +5,15 @@ const Company = require("../models/companyModel")
 const jwt = require("jsonwebtoken")
 const companyauth = require("../middleware/companyauth")
 
+// Register the service with the image already converted to base64
+
 serviceRouter.post("/registerService", companyauth, async (req, res) => {
     try {
         const token = req.cookies.token
         const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
         console.log(decodedToken)
 
-        const userId = decodedToken.user;  // Supondo que o _id do usuário esteja no token
+        const userId = decodedToken.user; 
 
         console.log("Token decoded, finding company...");
 
