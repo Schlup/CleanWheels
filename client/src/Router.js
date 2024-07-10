@@ -12,6 +12,7 @@ import CompanyContext from './context/CompanyAuthContext'
 import CreateService from './pages/company/CreateService'
 import MyProfile from './pages/user/MyProfile'
 import CarWashServices from './pages/user/CarWashServices'
+import CreateAgendamento from './pages/user/CreateAgendamento'
 
 function Router() {
 
@@ -39,7 +40,7 @@ function Router() {
                         <Route path='/home' element={<Home />} />
                         <Route path='/myprofile' element={<MyProfile />} />
                         <Route path='/carwashservices' element={<CarWashServices />} />
-                        
+                        <Route path='/agendarservicos' element={<CreateAgendamento />} />
 
                         {ownCompany === false && (
                             <>
