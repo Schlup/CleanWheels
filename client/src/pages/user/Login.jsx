@@ -43,7 +43,7 @@ export default function Login() {
                 name="email"
                 id="email"
                 type="email"
-                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
+                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-indigo-950"
                 placeholder="Insira seu e-mail"
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -55,7 +55,7 @@ export default function Login() {
                 name="password"
                 id="password"
                 type="password"
-                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-violet-500"
+                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-indigo-950"
                 placeholder="Insira sua senha"
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -68,13 +68,13 @@ export default function Login() {
                 Lembrar-me
               </label>
             </div>
-            <button className="font-medium text-base text-violet-500">
+            <button className="font-medium text-base text-indigo-950">
               Esqueci minha senha
             </button>
           </div>
           <div className="mt-8 flex flex-col gap-y-4">
             <button
-              className="active:scale-[.98] hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-violet-500 text-white text-lg font-bold"
+              className="active:scale-[.98] hover:scale-[1.01] ease-in-out py-3 rounded-xl bg-indigo-700 hover:bg-indigo-950 text-white text-lg font-bold"
               type="submit"
               onClick={submit}
             >
@@ -110,7 +110,7 @@ export default function Login() {
           </div>
           <div className="mt-8 flex justify-center items-center">
             <p className="font-medium text-base">Não possui uma conta? </p>
-            <button className="text-violet-500 text-base font-medium ml-2">
+            <button className="text-indigo-950 text-base font-medium ml-2">
               <Link to="/signup">Registre-se</Link>
             </button>
           </div>
