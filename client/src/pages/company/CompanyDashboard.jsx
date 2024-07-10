@@ -1,11 +1,14 @@
-import React from 'react'
+import React from 'react';
+import Nav from '../layout/Nav';
 
 function CompanyDashboard() {
-
-
   return (
-    <div>Company</div>
-  )
+    <main className="grid grid-cols-12 w-full h-screen">
+      <div className='col-span-2'>
+        <Nav />
+      </div>
+    </main>
+  );
 }
 
-export default CompanyDashboard
+export default CompanyDashboard;
