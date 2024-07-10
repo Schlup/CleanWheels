@@ -1,13 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Nav from '../layout/Nav';
 import CreateCompanyBtn from './CreateCompanyBtn';
 import AccessCompanyBtn from './AccessCompanyBtn';
 import LogOutBtn from './LogOutBtn';
 import CompanyContext from "../../context/CompanyAuthContext";
+import axios from 'axios';
 
 function MyProfile() {
   const { ownCompany } = useContext(CompanyContext);
   console.log("Company: " + ownCompany);
+
+  const [name, setName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get("http://localhost:3025/auth/userInfo");
+        const profile = response.data;
+        console.log(profile);
+
+        setName(profile.name);
+        setLastName(profile.lastname);
+        setCpf(profile.cpf);
+        setEmail(profile.email);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   return (
     <div className="grid grid-cols-12 w-full h-screen">
@@ -25,7 +50,8 @@ function MyProfile() {
                 id="name"
                 type="text"
                 className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-indigo-950"
-                placeholder=""
+                placeholder={name}
+                disabled
               />
             </form>
             <form method="POST">
@@ -35,7 +61,8 @@ function MyProfile() {
                 id="lastnamename"
                 type="text"
                 className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-indigo-950"
-                placeholder=""
+                placeholder={lastname}
+                disabled
               />
             </form>
             <form method="POST">
@@ -45,7 +72,8 @@ function MyProfile() {
                 id="cpf"
                 type="text"
                 className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-indigo-950"
-                placeholder=""
+                placeholder={cpf}
+                disabled
               />
             </form>
             <form method="POST">
@@ -55,17 +83,8 @@ function MyProfile() {
                 id="email"
                 type="email"
                 className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-indigo-950"
-                placeholder=""
-              />
-            </form>
-            <form method="POST">
-              <label className="text-lg font-medium">Telefone</label>
-              <input
-                name="phone"
-                id="phone"
-                type="text"
-                className="w-full border-2 border-gray-100 rounded-xl p-3 mt-1 bg-transparent focus:outline-none focus:border-indigo-950"
-                placeholder=""
+                placeholder={email}
+                disabled
               />
             </form>
           </div>

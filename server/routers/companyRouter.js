@@ -93,7 +93,7 @@ companyRouter.get("/companyOwner", async (req, res) => {
 companyRouter.get("/getCompanies", auth, async (req, res) => {
     try {
         Company.find({}).then((data) => {
-            res.send({ status: "ok", data: data })
+            res.send(data)
         })
     } catch (err) {
         res.json({ errorMessage: err })
