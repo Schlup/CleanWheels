@@ -6,7 +6,7 @@ function CreateService() {
     const [serviceName, setServiceName] = useState("")
     const [serviceDesc, setServiceDesc] = useState("")
     const [serviceValue, setServiceValue] = useState()
-    const [serviceImage, setServiceImage] = useState({ myFile: "" })
+    const [serviceImage, setServiceImage] = useState()
 
     async function submit(e) {
         e.preventDefault()
@@ -16,23 +16,24 @@ function CreateService() {
                 desc: serviceDesc,
                 value: serviceValue,
                 image: serviceImage
+            }, {
+                headers: { "Content-Type": "multipart/form-data" }
             })
             console.log("Uploaded!")
+            console.log(serviceImage)
         } catch (err) {
             console.log(err)
         }
     }
 
-    async function handleFileUpload(e) {
-        const file = e.target.files[0]
-        const base64 = await convertToBase64(file)
-        setServiceImage(base64)
+    function handleFileUpload(e) {
+        setServiceImage(e.target.files[0]);
     }
 
     return (
         <div>
             Create Service
-            <form method='POST'>
+            <form method='POST' encType='multipart/form-data'>
                 <label htmlFor="">Nome</label>
                 <input
                     onChange={(e) => setServiceName(e.target.value)}
@@ -53,8 +54,8 @@ function CreateService() {
                     type="file"
                     name="serviceImage"
                     id="serviceUpload"
-                    accept=".jpeg, .png, .jpg"
-                    onChange={(e) => handleFileUpload(e)}
+                    accept="image/* "
+                    onChange={handleFileUpload}
                 />
 
                 <button onClick={submit}>Submit</button>
@@ -64,16 +65,3 @@ function CreateService() {
 }
 
 export default CreateService
-
-function convertToBase64(file) {
-    return new Promise((resolve, reject) => {
-        const fileReader = new FileReader()
-        fileReader.readAsDataURL(file)
-        fileReader.onload = () => {
-            resolve(fileReader.result)
-        }
-        fileReader.onerror = (error) => {
-            reject(error)
-        }
-    })
-}

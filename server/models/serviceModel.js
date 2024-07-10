@@ -6,7 +6,7 @@ const serviceSchema = new mongoose.Schema({
     desc: { type: String, required: true },
     tags: { type: [String], required: false },
     value: { type: Number, required: true },
-    image: { type: String, required: true }
+    image: { type: String, data: Buffer, required: true }
 })
 
 const Service = mongoose.model("service", serviceSchema)
