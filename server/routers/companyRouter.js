@@ -4,10 +4,28 @@ const auth = require("../middleware/auth")
 
 const jwt = require("jsonwebtoken")
 
+const multer = require("multer")
+const path = require("path")
+
+//Middleware store images in the db
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "../client/src/pages/imagesCompany");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + file.originalname);
+    },
+});
+const upload = multer({ storage: storage });
+
 // Signup
-companyRouter.post("/signup", auth, async (req, res) => {
+companyRouter.post("/signup", auth, upload.single("image"), async (req, res) => {
     try {
         const { owner, name, serviceType, email, phone, cnpj, adress, employees } = req.body
+        const image = req.file.filename
+
+        console.log(image + " Imagem chegou no back")
 
         if (!name)
             return res.status(400).json({ errorMessage: "Please insert the company name." })
@@ -35,6 +53,7 @@ companyRouter.post("/signup", auth, async (req, res) => {
 
         const newCompany = new Company({
             owner: userId,
+            image,
             name,
             serviceType,
             email,
@@ -43,6 +62,8 @@ companyRouter.post("/signup", auth, async (req, res) => {
             adress,
             employees
         })
+
+        console.log({ owner, name, serviceType, email, phone, cnpj, adress, employees, image })
 
         const savedCompany = await newCompany.save()
         res.json(savedCompany)

@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 const companySchema = new mongoose.Schema({
     owner: { type: String },
+    image: { type: String, required: true },
     name: { type: String, required: true },
     serviceType: { type: [String], required: true }, // Fazer uma lista com todos os tipos disponiveis de serviço
     email: { type: String, required: true },
