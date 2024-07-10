@@ -10,6 +10,7 @@ import CompanyDashboard from "./pages/company/CompanyDashboard"
 import AuthContext from './context/UserAuthContext'
 import CompanyContext from './context/CompanyAuthContext'
 import CreateService from './pages/company/CreateService'
+import MyProfile from './pages/user/MyProfile'
 
 function Router() {
 
@@ -35,6 +36,7 @@ function Router() {
                 {loggedIn === true && (
                     <>
                         <Route path='/home' element={<Home />} />
+                        <Route path='/myprofile' element={<MyProfile />} />
 
                         {ownCompany === false && (
                             <>
