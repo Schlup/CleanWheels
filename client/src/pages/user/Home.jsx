@@ -54,12 +54,26 @@ function Home() {
         <div className="bg-white px-10 py-20 rounded-3xl">
           <h1 className="text-5xl font-semibold">Agende seu serviço</h1>
           <p className="font-medium text-lg text-gray-500 mt-4">Categorias</p>
-          <CarWashBtn />
-          <CarPolishingBtn />
-          <CarWrapBtn />
-          <CarCheckupBtn />
-          <CarMaintanceBtn />
-          <CarBodyRepairBtn />
+          <div className="grid gap-4 grid-flow-col">
+            <div className="col-span-1">
+              <CarWashBtn />
+            </div>
+            <div className="col-span-1">
+              <CarPolishingBtn />
+            </div>
+            <div className="col-span-1">
+              <CarWrapBtn />
+            </div>
+            <div className="col-span-1">
+              <CarCheckupBtn />
+            </div>
+            <div className="col-span-1">
+              <CarMaintanceBtn />
+            </div>
+            <div className="col-span-1">
+              <CarBodyRepairBtn />
+            </div>
+          </div>
         </div>
         <div className="bg-white px-10 py-20 rounded-3xl">
           <h1 className="text-5xl font-semibold">Prestadores de serviço</h1>
