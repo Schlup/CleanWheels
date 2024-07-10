@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AgendamentoBtn from '../layout/AgendamentoBtn';
 
 function CarWashServices() {
   const [companies, setCompanies] = useState([]);
@@ -35,6 +36,8 @@ function CarWashServices() {
                 <h2 className=''>Nome: {company.name}</h2>
                 <h2 className=''>Fone: {company.phone}</h2>
                 <h2 className=''>Endereço: {company.adress}</h2>
+                <AgendamentoBtn company={company._id} />
+
               </div>
             </div>
           ))

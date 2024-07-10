@@ -11,7 +11,7 @@ agendamentoRouter.post("/createAgendamento", auth, async (req, res) => {
         const userId = decodedToken.user;
         console.log("Token decoded, userID: " + userId);
 
-        const { company, cliente, data, horario, situacao } = req.body
+        const { company, data, horario } = req.body
 
         const newAgendamento = new Agendamento({
             company,
