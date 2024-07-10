@@ -7,21 +7,17 @@ function CreateAgendamento() {
     const [date, setDate] = useState('');
     const [horario, setHorario] = useState('');
 
-    console.log()
 
     const handleCreateAgendamento = async (e) => {
-        
+
         e.preventDefault();
 
         console.log("DeuSumbit")
-
-        const { company } = props; // Access company info passed from CarWashServices
-        
-        console.log("Company no back:" + company)
+        //console.log("Company no back:" + company)
 
         try {
             const response = await axios.post('http://localhost:3025/agendamento/createAgendamento', {
-                company: company._id, // Send company ID
+                //company: company._id, // Send company ID
                 date: date,
                 horario: horario,
             });

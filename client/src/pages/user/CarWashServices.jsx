@@ -30,11 +30,11 @@ function CarWashServices() {
       <div className="col-span-10 items-center justify-center">
         <div className="bg-white px-10 py-20 rounded-3xl">
           <h1 className="text-5xl font-semibold">Lavações</h1>
-          <div className="my-10 grid grid-flow-col gap-10 min-w-fit">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-8">
             {companies.length > 0 ? (
               companies.map((company) => (
                 <div key={company._id}>
-                  <div className="flex border-8 border-gray-400 bg-gray-400 rounded-xl">
+                  <div className="flex border-8 border-gray-300 bg-gray-300 rounded-xl">
                     <img
                       src={require(`../imagesCompany/${company.image}`)}
                       alt=""
@@ -47,7 +47,7 @@ function CarWashServices() {
                       <h2 className="">Nome: {company.name}</h2>
                       <h2 className="">Fone: {company.phone}</h2>
                       <h2 className="">Endereço: {company.adress}</h2>
-                      <AgendamentoBtn />
+                      <AgendamentoBtn company={company._id}/>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import Nav from '../layout/Nav';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../context/UserAuthContext';
+import CompanyContext from '../../context/CompanyAuthContext';
 
 function CreateCompany() {
   const [companyName, setCompanyName] = useState('');
@@ -11,6 +14,10 @@ function CreateCompany() {
   const [companyAdress, setCompanyAdress] = useState('');
   const [companyEmployees, setCompanyEmployees] = useState(['']);
   const [companyImage, setCompanyImage] = useState(null);
+
+  const { getLoggedIn } = useContext(AuthContext);
+  const { getOwnCompany } = useContext(CompanyContext);
+  const navigate = useNavigate()
 
   async function submit(e) {
     e.preventDefault();
@@ -31,8 +38,12 @@ function CreateCompany() {
           headers: { 'Content-Type': 'multipart/form-data' },
         },
       );
-      console.log('Uploaded!');
-      console.log(companyImage);
+      console.log('Company uploaded!');
+
+      await getLoggedIn(); // Atualiza o UserAuthContext da pagina, precisa do await para não dar erro
+      await getOwnCompany();
+      navigate("/myprofile")
+
     } catch (err) {
       console.log(err);
     }

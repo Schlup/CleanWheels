@@ -20,7 +20,6 @@ function MyProfile() {
       try {
         const response = await axios.get("http://localhost:3025/auth/userInfo");
         const profile = response.data;
-        console.log(profile);
 
         setName(profile.name);
         setLastName(profile.lastname);
