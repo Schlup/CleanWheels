@@ -8,13 +8,28 @@ import CarCheckupBtn from '../layout/CarCheckupBtn';
 import axios from 'axios';
 
 function Home() {
-  const [allServices, setAllServices] = useState(null);
+  const [allServices, setAllServices] = useState(null)
+  const [allAgendamentos, setAllAgendamentos] = useState([])
 
   const getImage = async () => {
     const result = await axios.get('http://localhost:3025/service/getServices');
     console.log(result);
     setAllServices(result.data.data);
   };
+
+  const getAgendamento = async () => {
+    try {
+      const companies = await axios.get("http://localhost:3025/company/getCompanies");
+      console.log(companies);
+      setAllAgendamentos(Array.isArray(companies.data) ? companies.data : []);
+    } catch (error) {
+      console.error("Error fetching companies:", error);
+    }
+  };
+
+  useEffect(() => {
+    getAgendamento()
+  }, [])
 
   useEffect(() => {
     getImage();
@@ -44,14 +59,14 @@ function Home() {
           {allServices === null
             ? ''
             : allServices.map((data) => {
-                return (
-                  <img
-                    src={require(`../images/${data.image}`)}
-                    alt=""
-                    key={require(`../images/${data.image}`)}
-                  />
-                );
-              })}
+              return (
+                <img
+                  src={require(`../images/${data.image}`)}
+                  alt=""
+                  key={require(`../images/${data.image}`)}
+                />
+              );
+            })}
         </div>
       </div>
     </div>
