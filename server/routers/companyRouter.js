@@ -46,7 +46,6 @@ companyRouter.post("/signup", auth, upload.single("image"), async (req, res) => 
 
         const token = req.cookies.token
         const verified = jwt.verify(token, process.env.JWT_SECRET)
-
         const userId = verified.user
 
         console.log("Company owner: ", userId)
@@ -91,15 +90,13 @@ companyRouter.get("/companyOwner", async (req, res) => {
     }
 })
 
-companyRouter.get("/getInfo", auth, async (req, res) => {
+companyRouter.get("/getCompanies", auth, async (req, res) => {
     try {
-        const token = req.cookies.token
-
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-        console.log(decodedToken)
-        res.send(decodedToken)
+        Company.find({}).then((data) => {
+            res.send({ status: "ok", data: data })
+        })
     } catch (err) {
-        res.send(err)
+        res.json({ errorMessage: err })
     }
 })
 
