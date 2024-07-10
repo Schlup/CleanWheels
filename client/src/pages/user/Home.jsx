@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Nav from '../layout/Nav';
 import CarWashBtn from '../layout/CarWashBtn';
 import CarPolishingBtn from '../layout/CarPolishingBtn';
@@ -7,37 +7,7 @@ import CarCheckupBtn from '../layout/CarCheckupBtn';
 import CarMaintanceBtn from '../layout/CarMaintanceBtn';
 import CarBodyRepairBtn from '../layout/CarBodyRepairBtn';
 
-import axios from 'axios';
-
 function Home() {
-  const [allServices, setAllServices] = useState(null);
-  const [allAgendamentos, setAllAgendamentos] = useState([]);
-
-  const getImage = async () => {
-    const result = await axios.get('http://localhost:3025/service/getServices');
-    console.log(result);
-    setAllServices(result.data.data);
-  };
-
-  const getAgendamento = async () => {
-    try {
-      const companies = await axios.get(
-        'http://localhost:3025/company/getCompanies',
-      );
-      console.log(companies);
-      setAllAgendamentos(Array.isArray(companies.data) ? companies.data : []);
-    } catch (error) {
-      console.error('Error fetching companies:', error);
-    }
-  };
-
-  useEffect(() => {
-    getAgendamento();
-  }, []);
-
-  useEffect(() => {
-    getImage();
-  }, []);
 
   return (
     <div className="grid grid-cols-12 w-full h-screen">
@@ -67,19 +37,6 @@ function Home() {
             Famosos no Clean Wheel
           </p>
         </div>
-        {/* <div>
-          {allServices === null
-            ? ''
-            : allServices.map((data) => {
-              return (
-                <img
-                  src={require(`../images/${data.image}`)}
-                  alt=""
-                  key={require(`../images/${data.image}`)}
-                />
-              );
-            })}
-        </div> */}
       </div>
     </div>
   );

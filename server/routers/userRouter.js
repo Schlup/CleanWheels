@@ -137,4 +137,23 @@ userRouter.get("/loggedIn", (req, res) => {
     }
 })
 
+userRouter.get("/userInfo", async (req, res) => {
+    try {
+        const token = req.cookies.token
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+        const userId = decodedToken.user
+        console.log(userId)
+
+        const user = await User.findById(userId).select('name lastname cpf email'); // Adjust the fields as necessary
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        console.log(user)
+        res.send(user)
+
+    } catch (err) {
+        res.send(err)
+    }
+})
+
 module.exports = userRouter;
