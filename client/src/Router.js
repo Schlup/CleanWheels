@@ -6,13 +6,13 @@ import Signup from "./pages/user/Signup"
 import Home from "./pages/user/Home"
 import CreateCompany from './pages/company/CreateCompany'
 import CompanyDashboard from "./pages/company/CompanyDashboard"
-
 import AuthContext from './context/UserAuthContext'
 import CompanyContext from './context/CompanyAuthContext'
 import CreateService from './pages/company/CreateService'
 import MyProfile from './pages/user/MyProfile'
 import CarWashServices from './pages/user/CarWashServices'
 import CreateAgendamento from './pages/user/CreateAgendamento'
+import Schedule from './pages/user/Schedule'
 
 function Router() {
 
@@ -41,6 +41,7 @@ function Router() {
                         <Route path='/myprofile' element={<MyProfile />} />
                         <Route path='/carwashservices' element={<CarWashServices />} />
                         <Route path='/agendarservicos' element={<CreateAgendamento />} />
+                        <Route path='/agenda' element={<Schedule />} />
 
                         {ownCompany === false && (
                             <>

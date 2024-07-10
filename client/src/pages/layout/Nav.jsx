@@ -19,7 +19,7 @@ function Nav() {
             Início
           </p>
         </Link>
-        <Link to="/" className="nav-item">
+        <Link to="/agenda" className="nav-item">
           <p className="flex bg-indigo-700 text-white items-center m-2 pl-6 py-2 rounded-md hover:bg-indigo-950">
             <IoCalendarOutline className="icon mr-2" />
             Agenda

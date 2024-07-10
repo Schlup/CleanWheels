@@ -21,12 +21,12 @@ function LandingPage() {
           style={{ backgroundImage: `url(${landingPageImage})` }}
         >
           <div className="backdrop-opacity-10 backdrop-invert bg-white/10">
-            <h1 className="text-6xl">
+            <h1 className="p-5 text-6xl">
               NÓS <span className="text-indigo-600">GERENCIAMOS</span> SEUS
               SERVIÇOS
             </h1>
-            <h2 className="text-3xl mt-12">Por que escolher o Clean Wheel?</h2>
-            <p className="text-xl mt-4">
+            <h2 className="mt-12 px-5 text-3xl">Por que escolher o Clean Wheel?</h2>
+            <p className="px-5 py-1 text-xl ">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
               enim necessitatibus architecto dicta asperiores obcaecati veniam
               voluptatem exercitationem? Dolorem maxime molestias delectus,
