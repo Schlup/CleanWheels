@@ -4,12 +4,14 @@ import CarWashBtn from '../layout/CarWashBtn';
 import CarPolishingBtn from '../layout/CarPolishingBtn';
 import CarWrapBtn from '../layout/CarWrapBtn';
 import CarCheckupBtn from '../layout/CarCheckupBtn';
+import CarMaintanceBtn from '../layout/CarMaintanceBtn';
+import CarBodyRepairBtn from '../layout/CarBodyRepairBtn';
 
 import axios from 'axios';
 
 function Home() {
-  const [allServices, setAllServices] = useState(null)
-  const [allAgendamentos, setAllAgendamentos] = useState([])
+  const [allServices, setAllServices] = useState(null);
+  const [allAgendamentos, setAllAgendamentos] = useState([]);
 
   const getImage = async () => {
     const result = await axios.get('http://localhost:3025/service/getServices');
@@ -19,17 +21,19 @@ function Home() {
 
   const getAgendamento = async () => {
     try {
-      const companies = await axios.get("http://localhost:3025/company/getCompanies");
+      const companies = await axios.get(
+        'http://localhost:3025/company/getCompanies',
+      );
       console.log(companies);
       setAllAgendamentos(Array.isArray(companies.data) ? companies.data : []);
     } catch (error) {
-      console.error("Error fetching companies:", error);
+      console.error('Error fetching companies:', error);
     }
   };
 
   useEffect(() => {
-    getAgendamento()
-  }, [])
+    getAgendamento();
+  }, []);
 
   useEffect(() => {
     getImage();
@@ -54,8 +58,16 @@ function Home() {
           <CarPolishingBtn />
           <CarWrapBtn />
           <CarCheckupBtn />
+          <CarMaintanceBtn />
+          <CarBodyRepairBtn />
         </div>
-        <div>
+        <div className="bg-white px-10 py-20 rounded-3xl">
+          <h1 className="text-5xl font-semibold">Prestadores de serviço</h1>
+          <p className="font-medium text-lg text-gray-500 mt-4">
+            Famosos no Clean Wheel
+          </p>
+        </div>
+        {/* <div>
           {allServices === null
             ? ''
             : allServices.map((data) => {
@@ -67,7 +79,7 @@ function Home() {
                 />
               );
             })}
-        </div>
+        </div> */}
       </div>
     </div>
   );
